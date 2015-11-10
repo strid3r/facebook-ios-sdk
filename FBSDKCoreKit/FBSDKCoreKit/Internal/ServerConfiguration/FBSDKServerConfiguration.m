@@ -126,8 +126,7 @@ implicitPurchaseLoggingEnabled:(BOOL)implicitPurchaseLoggingEnabled
 - (BOOL)_useFeatureWithKey:(NSString *)key dialogName:(NSString *)dialogName
 {
   if ([dialogName isEqualToString:FBSDKDialogConfigurationNameLogin]) {
-    return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
-                         _dialogFlows[FBSDKDialogConfigurationNameDefault][key]) boolValue];
+    return _dialogFlows[dialogName][key] ? [(NSNumber *) _dialogFlows[dialogName][key] boolValue] : YES; // Modified by EA.
   } else {
     return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
                          _dialogFlows[FBSDKDialogConfigurationNameSharing][key] ?:
